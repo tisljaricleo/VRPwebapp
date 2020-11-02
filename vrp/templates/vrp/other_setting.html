@@ -1,0 +1,27 @@
+{% extends "vrp/base.html" %}
+
+
+{% block title %}VRP - Other settings{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<div class="row" style="padding-top:0em; margin-top:0em; margin-bottom: 50px">
+    <h4>1) Create a problem</h4>
+    <img src="{% static 'vrp/images/upute1.JPG' %}" alt="" class="simple-img">
+    <img src="{% static 'vrp/images/upute1_a.PNG' %}" alt="" class="simple-img">  
+</div>
+
+<div class="row" style="padding-top:0em; margin-top:0em; margin-bottom: 50px">
+    <h4>2) Problem settings</h4>
+    <img src="{% static 'vrp/images/upute2.PNG' %}" alt="" class="simple-img">
+    <img src="{% static 'vrp/images/upute2_a.PNG' %}" alt="" class="simple-img">  
+</div>
+
+<div class="row" style="padding-top:0em; margin-top:0em; margin-bottom: 50px">
+    <h4>3) Visualization</h4>
+    <img src="{% static 'vrp/images/upute3.PNG' %}" alt="" class="simple-img">
+    <img src="{% static 'vrp/images/upute3_a.PNG' %}" alt="" class="simple-img">  
+</div>
+
+{% endblock content %}

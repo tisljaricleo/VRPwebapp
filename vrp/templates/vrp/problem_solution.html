@@ -1,0 +1,52 @@
+{% extends "vrp/base.html" %}
+
+
+{% block title %}VRP - Solution {% endblock %}
+
+{% block content %}
+
+
+<div class="row" style="padding-top:0em; margin-top:0em">
+    <p>Problem name: {{ problem_name }}</p>
+</div>
+
+<div class="row" style="padding-top:0em; margin-top:0em">
+    <p>Number of vehicles: {{ n_veh }}</p>
+</div>
+
+<div class="row" style="padding-top:0em; margin-top:0em">
+    <p>First solution strategy: {{ ffs }}</p>
+</div>
+
+<div class="row" style="padding-top:0em; margin-top:0em">
+    <p>Local search metaheuristics: {{ lsm }}</p>
+</div>
+
+<div class="row" style="padding-top:0em; margin-top:0em">
+    <p>Status: {{ status }}</p>
+</div>
+
+{% for item in string_rez %}
+<div class="row" style="padding-top:0em; margin-top:0em">
+    <p>{{ item }}</p>
+</div>
+{% endfor %}
+
+
+
+
+
+<!-- {% for s in string_rez %}
+    <div class="row" style="padding-top:0em; margin-top:0em">
+        <p>{{ s }}</p>
+    </div>
+        
+    {% endfor %} -->
+
+<!-- {{ string_rez }} -->
+
+
+
+
+
+{% endblock content %}

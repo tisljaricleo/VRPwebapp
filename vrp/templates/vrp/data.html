@@ -1,0 +1,130 @@
+{% extends "vrp/base.html" %}
+
+
+{% block title %}VRP - Data{% endblock %}
+
+
+{% block extrainport %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
+
+<!-- include leaflet css and javascript -->
+<link rel="stylesheet" crossorigin="" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js" crossorigin=""></script>
+<style type="text/css">
+    #map {
+        height: 800px;
+        
+    }
+</style>
+
+{% endblock extrainport%}
+
+{% block content %}
+
+
+<div class="row" style="padding-top:0em; margin-top:0em">
+   
+
+        <form name="form1" action="{% url 'vrp:create_problem' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="c_data">Dataset</label>
+                <select class="form-control" id="c_data" name="dataset">
+                    <option>Create new</option>
+                    <option>Existing</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="data_path">Dataset path (if existing is chosen)</label>
+                <input class="form-control" id="data_path" name="data_path">
+            </div>
+            <div class="form-group">
+                <label for="depot">Depot id</label>
+                <input class="form-control" id="depot" name="depot_id" value="0">
+            </div>
+            <div class="form-group">
+                <label for="p_name">Problem name</label>
+                <input class="form-control" id="p_name" name="problem_name">
+            </div>
+            <div class="form-group">
+                <label for="p_desc">Problem description (max. 250 char)</label>
+                <textarea class="form-control" id="p_desc" name="problem_desc"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="vrp_points">Chose VRP points on map:</label>
+                <textarea readonly class="form-control" id="vrp_points" name="vrp_points"></textarea>
+            </div>
+            <input type="submit" value="Create VRP problem">
+        </form>
+
+  
+    
+</div>
+
+<div id="map"></div>
+
+{% endblock content %}
+
+
+{% block add_scripts %}
+
+<script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
+
+<script>
+    // var map = L.map('map').setView([45.7963, 15.9805], 12);
+
+    // L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    //     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
+    // }).addTo(map);
+    var map, newMarker, markerLocation;
+    $(function () {
+        // Initialize the map
+        var map = L.map('map').setView([45.7963, 15.9805], 12);
+        L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        // var b = L.easyButton('fa-globe', function (btn, map) {
+
+        //     alert('you just clicked the html entity \&starf;');
+        //     $.post("url", {"data": 123})
+
+        // }).addTo(map);
+
+
+
+        newMarkerGroup = new L.LayerGroup();
+        map.on('click', addMarker);
+
+        function addMarker(e) {
+            // Add marker to map at click location; add popup window
+            var newMarker = new L.marker(e.latlng).addTo(map);
+
+            document.form1.vrp_points.value += e.latlng.lat;
+            document.form1.vrp_points.value += ",";
+            document.form1.vrp_points.value += e.latlng.lng;
+            document.form1.vrp_points.value += ";";
+            // var theDiv = document.getElementById("try");
+            // var content = document.createTextNode("bla");
+            // theDiv.appendChild(content);
+
+
+            console.log(e.latlng);
+        }
+
+
+    });
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+{% endblock add_scripts %}

@@ -1,0 +1,29 @@
+{% extends "vrp/base.html" %}
+
+
+{% block title %}VRP - Data{% endblock %}
+
+{% block content %}
+<div class="row" style="padding-top:0em; margin-top:0em">
+    <p>{{ data_type }}</p>
+</div>
+<div class="row" style="padding-top:0em; margin-top:0em">
+    <p>{{ data_path }}</p>
+</div>
+<div class="row" style="padding-top:0em; margin-top:0em">
+    <p>{{ depot_id }}</p>
+</div>
+<div class="row" style="padding-top:0em; margin-top:0em">
+    <p>{{ problem_name }}</p>
+</div>
+<div class="row" style="padding-top:0em; margin-top:0em">
+    <p>{{ problem_desc }}</p>
+</div>
+<div class="row" style="padding-top:0em; margin-top:0em">
+    <p>{{ status }}</p>
+</div>
+<div class="row" style="padding-top:0em; margin-top:0em">
+    <a class="btn btn-primary" href="{% url 'vrp:problem_settings' %}" role="button">Go to problem setting</a>
+</div>
+
+{% endblock content %}

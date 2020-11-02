@@ -1,0 +1,72 @@
+{% extends "vrp/base.html" %}
+
+
+{% block title %}VRP - Solution {% endblock %}
+
+{% block content %}
+
+<div class="row" style="padding-top:0em; margin-top:0em">
+
+    <p>Select a problem (and settings) to solve:</p>
+
+</div>
+
+<div class="row" style="padding-top:0em; margin-top:0em">
+
+    <form action="{% url 'vrp:problem_solution' %}" method="post">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="c_problem">Problem name</label>
+            <select class="form-control" id="c_problem" name="problem_name">
+                {% for problem in vrp_problems%}
+                <option>{{ problem }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="n_veh">Number of vehicles</label>
+            <input class="form-control" id="n_veh" name="n_veh">
+        </div>
+        <div class="form-group">
+            <label for="ffs">First Solution Strategy</label>
+            <select class="form-control" id="ffs" name="ffs">                
+                <option>AUTOMATIC</option>  
+                <option>PATH_CHEAPEST_ARC</option>
+                <option>PATH_MOST_CONSTRAINED_ARC</option>   
+                <option>EVALUATOR_STRATEGY</option>   
+                <option>SAVINGS</option>   
+                <option>SWEEP</option>   
+                <option>CHRISTOFIDES</option>   
+                <option>ALL_UNPERFORMED</option>   
+                <option>BEST_INSERTION</option>   
+                <option>PARALLEL_CHEAPEST_INSERTION</option>   
+                <option>LOCAL_CHEAPEST_INSERTION</option>   
+                <option>GLOBAL_CHEAPEST_ARC</option>   
+                <option>LOCAL_CHEAPEST_ARC</option>   
+                <option>FIRST_UNBOUND_MIN_VALUE</option>               
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="lsm">Local Search Metaheuristic</label>
+            <select class="form-control" id="lsm" name="lsm">
+                <option>AUTOMATIC</option>  
+                <option>GREEDY_DESCENT</option> 
+                <option>GUIDED_LOCAL_SEARCH</option> 
+                <option>SIMULATED_ANNEALING</option> 
+                <option>TABU_SEARCH</option> 
+            </select>
+        </div>
+
+        <input type="submit" value="Solve it!">
+    </form>
+
+
+
+
+</div>
+
+
+
+
+{% endblock content %}

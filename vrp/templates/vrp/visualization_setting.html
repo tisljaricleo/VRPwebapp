@@ -1,0 +1,38 @@
+{% extends "vrp/base.html" %}
+
+
+{% block title %}VRP - Visualization settings {% endblock %}
+
+{% block content %}
+
+<div class="row" style="padding-top:0em; margin-top:0em">
+
+    <p>Select a problem to visualize:</p>
+
+</div>
+
+<div class="row" style="padding-top:0em; margin-top:0em">
+
+    <form action="{% url 'vrp:visualization' %}" method="post">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="c_problem">Problem name</label>
+            <select class="form-control" id="c_problem" name="problem_name">
+                {% for problem in vrp_problems%}
+                <option>{{ problem }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <input type="submit" value="Visualize it!">
+    </form>
+
+
+
+
+</div>
+
+
+
+
+{% endblock content %}

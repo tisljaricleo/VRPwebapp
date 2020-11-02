@@ -1,0 +1,61 @@
+{% extends "vrp/base.html" %}
+
+{% block title %}VRP - Visualization {% endblock %}
+
+{% block extrainport %}
+<!-- include leaflet css and javascript -->
+<link rel="stylesheet" crossorigin="" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js" crossorigin=""></script>
+<style type="text/css">
+    #map {
+        height: 800px;
+    }
+</style>
+{% endblock extrainport%}
+
+{% block content %}
+{% load static %}
+<div id="map"></div>
+<p>{{ status }}</p>
+
+<script>
+    var map = L.map('map').setView([45.7963, 15.9805], 12);
+
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    all_data = {{ data }}    // data is variable sent by view (as context)!
+
+    console.log(all_data)
+
+    locations = [];
+    colors = ['red', 'blue', 'green', 'black', 'yellow'];
+
+    for (var j = 0; j < all_data.length; j++) {
+        locations = all_data[j];
+
+        var pointList = [];
+        for (var i = 0; i < locations.length; i++) {
+            pointList.push(new L.LatLng(locations[i][0], locations[i][1]));
+        }
+
+        var firstpolyline = new L.Polyline(pointList, {
+            color: getRandomColor(),
+            weight: 5,
+            opacity: 0.9,
+            smoothFactor: 1
+        });
+        firstpolyline.addTo(map);
+    }
+
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+</script>
+{% endblock content %}

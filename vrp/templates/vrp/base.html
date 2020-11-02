@@ -1,0 +1,238 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+
+    {% block extrainport %}
+    {% endblock extrainport%}
+   
+
+
+    <title>{% block title %}Leoooo{% endblock %}</title>
+
+    
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'vrp/index_style.css' %}">
+
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+    <!-- ICON CREDITS:
+    <div>Icons made by <a href="http://www.bogdanrosu.com/" title="Bogdan Rosu">Bogdan Rosu</a> from <a href="https://www.flaticon.com/" 		    title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" 		    title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+    <div>Icons made by <a href="http://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" 		    title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" 		    title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+    <div>Icons made by <a href="http://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" 		    title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" 		    title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+
+    -->
+
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <a href="{% url 'vrp:index' %}">
+                    <h2>VRP</h2>
+                    <h5>Solving the Vehicle routing problem</h5>
+                </a>
+            </div>
+
+            <ul class="list-unstyled components">
+                <!-- <p>Navigation</p> -->
+
+                <!-- <li class="active">
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="#">Home 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Home 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Home 3</a>
+                        </li>
+                    </ul>
+                </li> -->
+
+                <li>
+                    <a href="{% url 'vrp:other_settings' %}">
+                            <img src="{% static 'vrp/images/statistics.svg' %}" alt="" class="nav-images">
+                            &nbsp&nbsp&nbsp&nbspUsing the app
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'vrp:data' %}">
+                        <img src="{% static 'vrp/images/scientist.svg' %}" alt="" class="nav-images">
+                        &nbsp&nbsp&nbsp&nbspCreate problem
+                    </a>
+                </li>
+                <li>
+
+                    <a href="{% url 'vrp:problem_settings' %}">
+                            <img src="{% static 'vrp/images/telescope.svg' %}" alt="" class="nav-images">
+                            &nbsp&nbsp&nbsp&nbspProblem settings
+                    </a>
+                </li>
+
+                
+                <li>
+                    <a href="{% url 'vrp:visualization_setting' %}">
+                            <img src="{% static 'vrp/images/book.svg' %}" alt="" class="nav-images">
+                            &nbsp&nbsp&nbsp&nbspVisualization
+                    </a>
+                </li>
+
+            </ul>
+
+            <ul class="list-unstyled CTAs">
+                <li>
+                    <a href="{% url 'admin:index' %}" class="download">Admin login</a>
+                </li>
+            </ul>
+
+            <ul class="list-unstyled components">
+                <p>
+                    <a href="http://www.fpz.unizg.hr">FPZ.HR</a> <br>
+                    <a href="http://www.fpz.unizg.hr/zits/?lang=en">ITS</a> <br>
+                    <a href="https://across-datascience.zci.hr/datacross">DATACROSS</a> <br>
+                </p>
+
+            </ul>
+
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content">
+
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container ">
+
+                        <div class="ml-auto col-auto">
+                            <button type="button" id="sidebarCollapse" class="button-menu">
+                                <img src="{% static 'vrp/images/menu-button.svg' %}">
+                            </button>
+                        </div>
+                    <!-- <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">Page</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Page</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Page</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Page</a>
+                            </li>
+                        </ul>
+                    </div> -->
+                </div>
+            </nav>
+            <div class="container">
+
+                {% block content %}
+                {% endblock content%}
+
+                    <!--<div class="row" style="padding-top:0em; margin-top:0em">-->
+
+                        <!---->
+
+                        <!--<div class="col-sm-8">-->
+                                <!--<h2 style="text-align:left;float:left;">Leo Tišljarić</h2>-->
+                                <!--<h5 >&nbsp;&nbsp;mag.ing.traff.</h5>-->
+                                <!--<hr style="clear:both;"/>-->
+
+                                <!--<h5>Junior reseacher</h5>-->
+                                <!--University of Zagreb <br>-->
+                                <!--Faculty of Transport and Traffic Sciences <br>-->
+                                <!--Department of Intelligent Transport Systems <br>-->
+                                <!--ZUK Borongaj, Object 71, Room 24 <br>-->
+                                <!--Borongajska cesta 83A, 10000 Zagreb, Croatia<br> <br>-->
+                                <!--<b>Email:</b> tisljaricleo@gmail.com <br>-->
+                                <!--<b>Tel:</b> +385 1 2457 924 <br>-->
+
+
+
+                        <!--</div>-->
+
+                        <!--&lt;!&ndash; style="background: #d4ffd4;" &ndash;&gt;-->
+
+                        <!--<div class="col-sm-4 mx-auto">-->
+                            <!--<div class="text-center padded">-->
+                                    <!--<img src="{% static 'vrp/images/profile_pic.jpg' %}" alt="" class="profile-img">-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+                    <!--<div class="row">-->
+                        <!--<div class="col-sm-8">-->
+                                <!--<br>-->
+                                <!--<b>Research interests: </b> Data mining, Machine learning, Database, Intelligent transport systems, Web development-->
+
+                        <!--</div>-->
+                        <!--<div class="col-sm-4 mx-auto">-->
+                            <!--<div class="text-center padded">-->
+                                <!--<img src="{% static 'vrp/images/linkedin-logo-button.svg' %}" alt="" class="social-icons">-->
+                                <!--<img src="{% static 'vrp/images/twitter-logo-button.svg' %}" alt="" class="social-icons">-->
+                                <!--<img src="{% static 'vrp/images/research-gate.png' %}" alt="" class="social-icons">-->
+                                <!--<img src="{% static 'vrp/images/google-scholar.png' %}"  alt="" class="social-icons">-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+            </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <!-- jQuery Custom Scroller CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#sidebar").mCustomScrollbar({
+                theme: "minimal"
+            });
+
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar, #content').toggleClass('active');
+                $('.collapse.in').toggleClass('in');
+                $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+            });
+        });
+    </script>
+
+{% block add_scripts %}
+{% endblock add_scripts %}
+
+</body>
+
+</html>

@@ -1,0 +1,206 @@
+{% extends "vrp/base.html" %}
+
+
+{% block title %}VRP - Intro{% endblock %}
+
+{% block content %}
+
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
+
+{% load static %}
+
+<div class="row" style="padding-top:0em; margin-top:0em; margin-bottom: 50px;">
+    <h1>Vehicle Routing Problem (VRP)</h1>
+    <p>
+        The Vehicle Routing Problem (VRP) dates back to the end of the fifties of the last
+        century when Dantzig and Ramser set the mathematical programming formulation and
+        algorithmic approach to solve the problem of delivering gasoline to service stations. Since
+        then the interest in VRP evolved from a small group of mathematicians to the broad range
+        of researchers and practitioners, from different disciplines, involved in this field today.
+    </p>
+
+
+</div>
+
+<div class="row" style="padding-top:0em; margin-top:0em">
+    <h4>Problem</h4>
+    <p>The VRP definition states that m vehicles initially located at a depot are to deliver
+        discrete quantities of goods to n customers. Determining the optimal route used by a group
+        of vehicles when serving a group of users represents a VRP problem. The objective is to
+        minimize the overall transportation cost. The solution of the classical VRP problem is a set
+        of routes which all begin and end in the depot, and which satisfies the constraint that all the
+        customers are served only once. The transportation cost can be improved by reducing the
+        total travelled distance and by reducing the number of the required vehicles.
+    </p>
+</div>
+<div class="row" style="padding-top:0em; margin-top:0em; margin-bottom: 50px;">
+    <div class="col-sm-6">
+        <img src="{% static 'vrp/images/vrp_solo.PNG' %}" alt="" class="simple-img">
+        <h6>Fig.1 Problem settings: depot is located on the position 0. Other positions represent the delivery places.
+        </h6>
+
+    </div>
+    <div class="col-sm-6">
+        <img src="{% static 'vrp/images/vrp_main.JPG' %}" alt="" class="simple-img">
+        <h6>Fig.2 Solved VRP problem: routes for 4 delivery vehicles.</h6>
+
+    </div>
+</div>
+
+<div class="row" style="padding-top:0em; margin-top:0em">
+    <h4>Mathematical formulation</h4>
+</div>
+
+<div class="row" style="padding-top:0em; margin-top:0em; margin-bottom: 50px;">
+    
+    <div class="col-sm-6">
+        <h6>Goal function:</h6>
+        <img src="{% static 'vrp/images/vrp_goal.PNG' %}" alt="" style="height: 100px;">
+    </div>
+    <div class="col-sm-6">
+        <h6>Constraints:</h6>
+        <img src="{% static 'vrp/images/vrp_const.PNG' %}" alt="" class="simple-img">
+    </div>
+
+    
+</div>
+
+<div class="row" style="padding-top:0em; margin-top:0em">
+    <h4>Types</h4>
+    <p>The majority of the real world problems are often much more complex than the classical
+        VRP. Therefore in practice, the classical VRP problem is augmented by constraints.
+    </p>
+</div>
+<div class="row" style="padding-top:0em; margin-top:0em; margin-bottom: 50px;">
+    <button type="button" class="btn btn-primary">Capacitated Vehicle Routing Problem (CVRP)</button>
+    <button type="button" class="btn btn-secondary">Vehicle Routing Problem with Time Windows (VRPTW)</button>
+    <button type="button" class="btn btn-success">Vehicle Routing Problem with Pickup and Delivery (VRPPD)</button>
+    <button type="button" class="btn btn-danger">Vehicle Routing Problem with Multiple Trips (VRPMT)</button>
+    <button type="button" class="btn btn-warning">Open Vehicle Routing Problem (OVRP)</button>
+    <button type="button" class="btn btn-info">Inventory Routing Problem (IRP)</button>
+</div>
+<div class="row" style="padding-top:0em; margin-top:0em">
+    <h4>Routing options</h4>
+</div>
+<div class="row" style="padding-top:0em; margin-top:0em">
+    <h5>1) First solution strategy: </h5>
+        <p>The first solution strategy is the method the solver uses to find an initial solution. All strategies can be used to create an initial solution at the Problem setting page.</p>
+
+        <table class="table">
+            <thead>
+              <tr>                
+                <th scope="col">Label</th>
+                <th scope="col">Description</th>                
+              </tr>
+            </thead>
+            <tbody>
+              <tr>              
+                <td>AUTOMATIC</td>
+                <td>Lets the solver detect which strategy to use according to the model being solved.</td>
+              </tr>
+              <tr>
+                <td>PATH_CHEAPEST_ARC</td>
+                <td>Starting from a route "start" node, connect it to the node which produces the cheapest route segment, then extend the route by iterating on the last node added to the route.</td>
+              </tr>
+              <tr>
+                <td>PATH_MOST_CONSTRAINED_ARC</td>
+                <td>Similar to PATH_CHEAPEST_ARC, but arcs are evaluated with a comparison-based selector which will favor the most constrained arc first. To assign a selector to the routing model, use the method ArcIsMoreConstrainedThanArc().</td>
+              </tr>
+              <tr>              
+                <td>EVALUATOR_STRATEGY</td>
+                <td>Similar to PATH_CHEAPEST_ARC, except that arc costs are evaluated using the function passed to SetFirstSolutionEvaluator().</td>
+              </tr>
+              <tr>              
+                <td>SAVINGS</td>
+                <td>Savings algorithm (Clarke & Wright). Reference: Clarke, G. & Wright, J.W.: "Scheduling of Vehicles from a Central Depot to a Number of Delivery Points", Operations Research, Vol. 12, 1964, pp. 568-581.</td>
+              </tr>
+              <tr>              
+                <td>SWEEP</td>
+                <td>Sweep algorithm (Wren & Holliday). Reference: Anthony Wren & Alan Holliday: Computer Scheduling of Vehicles from One or More Depots to a Number of Delivery Points Operational Research Quarterly (1970-1977), Vol. 23, No. 3 (Sep., 1972), pp. 333-344.</td>
+              </tr>
+              <tr>              
+                <td>CHRISTOFIDES</td>
+                <td>Christofides algorithm (actually a variant of the Christofides algorithm using a maximal matching instead of a maximum matching, which does not guarantee the 3/2 factor of the approximation on a metric travelling salesman). Works on generic vehicle routing models by extending a route until no nodes can be inserted on it. Reference: Nicos Christofides, Worst-case analysis of a new heuristic for the travelling salesman problem, Report 388, Graduate School of Industrial Administration, CMU, 1976.</td>
+              </tr>
+              <tr>              
+                <td>ALL_UNPERFORMED</td>
+                <td>Make all nodes inactive. Only finds a solution if nodes are optional (are element of a disjunction constraint with a finite penalty cost).</td>
+              </tr>
+              <tr>              
+                <td>BEST_INSERTION</td>
+                <td>Iteratively build a solution by inserting the cheapest node at its cheapest position; the cost of insertion is based on the global cost function of the routing model. As of 2/2012, only works on models with optional nodes (with finite penalty costs).</td>
+              </tr>
+              <tr>              
+                <td>PARALLEL_CHEAPEST_INSERTION</td>
+                <td>Iteratively build a solution by inserting the cheapest node at its cheapest position; the cost of insertion is based on the arc cost function. Is faster than BEST_INSERTION.</td>
+              </tr>
+              <tr>              
+                <td>LOCAL_CHEAPEST_INSERTION</td>
+                <td>Iteratively build a solution by inserting each node at its cheapest position; the cost of insertion is based on the arc cost function. Differs from PARALLEL_CHEAPEST_INSERTION by the node selected for insertion; here nodes are considered in their order of creation. Is faster than PARALLEL_CHEAPEST_INSERTION.</td>
+              </tr>
+              <tr>              
+                <td>GLOBAL_CHEAPEST_ARC</td>
+                <td>Iteratively connect two nodes which produce the cheapest route segment.</td>
+              </tr>
+              <tr>              
+                <td>LOCAL_CHEAPEST_ARC</td>
+                <td>Select the first node with an unbound successor and connect it to the node which produces the cheapest route segment.</td>
+              </tr>
+              <tr>              
+                <td>FIRST_UNBOUND_MIN_VALUE</td>
+                <td>Select the first node with an unbound successor and connect it to the first available node. This is equivalent to the CHOOSE_FIRST_UNBOUND strategy combined with ASSIGN_MIN_VALUE (cf. constraint_solver.h).</td>
+              </tr>
+            </tbody>
+          </table>
+</div>
+
+
+<div class="row" style="padding-top:0em; margin-top:0em; margin-bottom: 50px;">
+
+    <h5>2) Local search options: </h5>
+    <p>The following table lists the options for local search strategies (also called metaheuristics). .......................................................................................................................................................................................................................................           ................                     </p>
+    <table class="table">
+        <thead>
+          <tr>                
+            <th scope="col">Label</th>
+            <th scope="col">Description</th>                
+          </tr>
+        </thead>
+        <tbody>
+          <tr>              
+            <td>AUTOMATIC</td>
+            <td>Lets the solver select the metaheuristic.</td>
+          </tr>
+          <tr>              
+            <td>GREEDY_DESCENT</td>
+            <td>Accepts improving (cost-reducing) local search neighbors until a local minimum is reached.</td>
+          </tr>
+          <tr>              
+            <td>GUIDED_LOCAL_SEARCH</td>
+            <td>Uses guided local search to escape local minima (cf. http://en.wikipedia.org/wiki/Guided_Local_Search); this is generally the most efficient metaheuristic for vehicle routing.</td>
+          </tr>
+          <tr>              
+            <td>SIMULATED_ANNEALING</td>
+            <td>Uses simulated annealing to escape local minima (cf. http://en.wikipedia.org/wiki/Simulated_annealing).</td>
+          </tr>
+          <tr>              
+            <td>TABU_SEARCH</td>
+            <td>Uses tabu search to escape local minima (cf. http://en.wikipedia.org/wiki/Tabu_search).</td>
+          </tr>          
+        </tbody>
+      </table>
+
+</div>
+
+
+<div class="row" style="padding-top:0em; margin-top:0em">
+
+</div>
+
+
+
+{% endblock content %}
