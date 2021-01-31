@@ -18,3 +18,6 @@ For more information visit [official instructions](https://docs.djangoproject.co
 3. Type `python manage.py runserver`.
 4. Open the browser and type http://localhost:8000/vrp/.
 5. Enjoy!
+
+# Contact and connect
+[Leo Tisljaric] (https://www.linkedin.com/in/leo-ti%C5%A1ljari%C4%87-28a56b123/)
